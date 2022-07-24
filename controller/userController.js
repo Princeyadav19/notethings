@@ -149,7 +149,17 @@ class userController{
         res.redirect('/dashboard')
     }
 
-
+    static search = async(req,res)=>{
+        const email = req.session.username;
+        const priority = req.body.search;
+        const userdetail = await datamodel.findOne({email:email});
+        const notedetail = await noters.find({priority:priority});
+        console.log(notedetail);
+        if(notedetail!=undefined){res.render('dashboard',{data:notedetail,detail:userdetail})}
+        else {
+            res.render('dashboard',{msg:"no data found",detail:userdetail})
+        }
+    }
 }
 
 module.exports = userController;

@@ -28,4 +28,6 @@ router.get('/editnote/:id',userController.editnote)
 router.post('/updatenote/:id',userController.updatenote)
 router.get('/deletenote/:id',userController.deletenote)
 
+router.post('/dashboard/search',userController.search)
+
 module.exports = router;
