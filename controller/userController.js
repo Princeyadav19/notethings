@@ -137,7 +137,7 @@ class userController{
             const {ObjectId} = require('mongodb')
             const userdetail = await noters.findOne({_id:req.params.id});
             console.log(userdetail);
-            console.log(await noters.findOneAndUpdate({_id:req.params.id},{$set:{title:title,content:content}}).exec());
+            console.log(await noters.findByIdAndUpdate({_id:req.params.id},{$set:{title:title,content:content}}).exec());
             res.redirect('/dashboard')
         
     }
@@ -153,7 +153,7 @@ class userController{
         const email = req.session.username;
         const priority = req.body.search;
         const userdetail = await datamodel.findOne({email:email});
-        const notedetail = await noters.find({priority:priority});
+        const notedetail = await noters.find({email:email,priority:priority});
         console.log(notedetail);
         if(notedetail!=undefined){res.render('dashboard',{data:notedetail,detail:userdetail})}
         else {
